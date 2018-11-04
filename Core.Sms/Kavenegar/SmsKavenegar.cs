@@ -32,13 +32,13 @@ namespace Core.Sms.Kavenegar
             }
             catch (global::Kavenegar.Core.Exceptions.ApiException ex)
             {
-                // در صورتی که خروجی وب سرویس 200 نباشد این خطارخ می دهد.
+                //if it doesn't return 200 
                 Console.Write("Message : " + ex.Message);
                 return false;
             }
             catch (global::Kavenegar.Core.Exceptions.HttpException ex)
             {
-                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                //if connect to service error occured 
                 Console.Write("Message : " + ex.Message);
                 return false;
             }
