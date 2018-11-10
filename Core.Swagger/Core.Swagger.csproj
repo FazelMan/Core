@@ -11,6 +11,7 @@
     <PackageProjectUrl>https://github.com/FazelMan/Core/tree/master/Core.Swagger</PackageProjectUrl>
     <RepositoryUrl>https://github.com/FazelMan/Core/tree/master/Core.Swagger</RepositoryUrl>
     <Version>1.0.1</Version>
+    <Description>Core.Swagger</Description>
   </PropertyGroup>
 
   <ItemGroup>

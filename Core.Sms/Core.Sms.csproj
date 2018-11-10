@@ -11,6 +11,7 @@
     <RepositoryUrl>https://github.com/FazelMan/Core/tree/master/Core.Sms</RepositoryUrl>
     <Version>1.0.1</Version>
     <Company>Timche</Company>
+    <Description>Core.Sms</Description>
   </PropertyGroup>
 
   <ItemGroup>
