@@ -14,7 +14,7 @@ namespace Core.Common.Extentions
             {RegexType.Email, @"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" }
         };
 
-        public static bool IsValidPhoneNumber(this string value, RegexType regexType)
+        public static bool IsValidRegex(this string value, RegexType regexType)
         {
             var pattern = DicRegex[regexType];
             return new Regex(pattern, RegexOptions.IgnoreCase).IsMatch(value);
