@@ -12,6 +12,7 @@ namespace Core.Domain.Abstract.Repositories.Base
     public interface IBaseRepository<T, Type> where T : class
     {
         Task<T> InsertAsync(T entity);
+        Task InsertRangeAsync(List<T> entity);
         Task<SearchResult<T, BaseSearchParameter>> GetListAsync(BaseSearchParameter searchParameters);
         Task<IEnumerable<T>> GetListAsync(PaginationDto pagination);
         Task<SearchResult<T>> GetListAsync();
@@ -20,6 +21,7 @@ namespace Core.Domain.Abstract.Repositories.Base
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task<Type> DeleteAsync(Type id);
         Task<Type> UpdateAsync(T entity);
+        Task<Type> UpdateRangeAsync(List<T> items);
         IQueryable<T> GetDbSet(Expression<Func<T, bool>> expression);
         DbSet<T> GetDbSet();
     }

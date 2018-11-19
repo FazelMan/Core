@@ -22,6 +22,19 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             _dbSet = _uow.Set<T>();
         }
 
+        public virtual async Task<T> InsertAsync(T entity)
+        {
+            await _dbSet.AddAsync(entity);
+            await _uow.SaveChangesAsync();
+            return entity;
+        }
+
+        public virtual async Task InsertRangeAsync(List<T> entity)
+        {
+            await _dbSet.AddRangeAsync(entity);
+            await _uow.SaveChangesAsync();
+        }
+
         public virtual async Task<Type> DeleteAsync(Type id)
         {
             var entity = await _dbSet.FindAsync(id);
@@ -59,13 +72,6 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             return result;
         }
 
-        public virtual async Task<T> InsertAsync(T entity)
-        {
-            _dbSet.Add(entity);
-            await _uow.SaveChangesAsync();
-            return entity;
-        }
-
         public virtual async Task<Type> UpdateAsync(T entity)
         {
             var model = await FindAsync(entity.Id);
@@ -77,6 +83,13 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             await _uow.SaveChangesAsync();
 
             return entity.Id;
+        }
+
+        public async Task<Type> UpdateRangeAsync(List<T> items)
+        {
+            _dbSet.UpdateRange(items);
+            await _uow.SaveChangesAsync();
+            return default(Type);
         }
 
         public virtual async Task<T> FindAsync(Type id)
