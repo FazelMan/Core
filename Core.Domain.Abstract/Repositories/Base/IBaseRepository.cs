@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Core.Common.ApiResult;
 using Core.Domain.Dto;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +14,8 @@ namespace Core.Domain.Abstract.Repositories.Base
     {
         Task<T> InsertAsync(T entity);
         Task InsertRangeAsync(List<T> entity);
-        Task<SearchResult<T, BaseSearchParameter>> GetListAsync(BaseSearchParameter searchParameters);
-        Task<IEnumerable<T>> GetListAsync(PaginationDto pagination);
-        Task<SearchResult<T>> GetListAsync();
+        Task<ApiResultList<T>> GetListAsync(PaginationDto pagination);
+        Task<ApiResultList<T>> GetListAsync();
         Task<T> FindAsync(Type id);
         T Find(Type id);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);

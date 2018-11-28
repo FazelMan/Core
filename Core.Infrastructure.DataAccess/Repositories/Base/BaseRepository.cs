@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Core.Common.ApiResult;
 using Core.Common.Dto.Api;
 using Core.Domain.Abstract.Repositories.Base;
 using Core.Domain.Dto;
@@ -43,33 +44,17 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             return entity.Id;
         }
 
-        public virtual async Task<SearchResult<T, BaseSearchParameter>> GetListAsync(BaseSearchParameter searchParameters)
-        {
-            var result = new SearchResult<T, BaseSearchParameter>
-            {
-                SearchParameter = searchParameters
-            };
-            var query = _dbSet.AsNoTracking().OrderByDescending(c => c.Id).AsQueryable();
-
-            if (searchParameters.SearchParameter != default(DateTime))
-            {
-                query = query.Where(c => c.UpdateDate <= searchParameters.SearchParameter);
-            }
-
-            if (searchParameters.NeedTotalCount)
-            {
-                result.TotalCount = query.Count();
-            }
-
-            result.Result = await query.Take(searchParameters.PageSize).ToListAsync();
-            return result;
-        }
-
-        public async Task<IEnumerable<T>> GetListAsync(PaginationDto pagination)
+        public async Task<ApiResultList<T>> GetListAsync(PaginationDto pagination)
         {
             var query = _dbSet.AsNoTracking().OrderByDescending(c => c.Id).AsQueryable();
             var result = await query.Skip(pagination.PageIndex).Take(pagination.PageSize).ToListAsync();
-            return result;
+
+            return new ApiResultList<T>
+            {
+                Result = result,
+                FilteredCount = result.Count,
+                TotalCount = result.Count()
+            };
         }
 
         public virtual async Task<Type> UpdateAsync(T entity)
@@ -122,13 +107,18 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             return _dbSet;
         }
 
-        public virtual async Task<SearchResult<T>> GetListAsync()
+        public virtual async Task<ApiResultList<T>> GetListAsync()
         {
-            var result = new SearchResult<T>();
             var query = _dbSet.AsNoTracking().OrderByDescending(c => c.Id).AsQueryable();
 
-            result.Result = await query.ToListAsync();
-            return result;
+            var result = await query.ToListAsync();
+
+            return new ApiResultList<T>
+            {
+                Result = result,
+                FilteredCount = result.Count,
+                TotalCount = result.Count()
+            };
         }
     }
 }
