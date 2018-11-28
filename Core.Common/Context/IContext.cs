@@ -8,6 +8,6 @@ namespace Core.Common.Context
         Uri Uri();
         string GetHostDomain();
         HttpRequest GetHttpRequest();
-        Guid? GetUserId();
+        Guid GetUserId();
     }
 }

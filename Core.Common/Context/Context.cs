@@ -33,12 +33,8 @@ namespace Core.Common.Context
             return _httpContextAccessor.HttpContext.Request;
         }
 
-        public Guid? GetUserId()
+        public Guid GetUserId()
         {
-            if (_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier) == null)
-            {
-                return null;
-            }
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return Guid.Parse(userId);
         }
