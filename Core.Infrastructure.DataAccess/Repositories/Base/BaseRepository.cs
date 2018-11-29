@@ -17,6 +17,7 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
     {
         protected DbSet<T> _dbSet;
         private readonly IUnitOfWork _uow;
+
         public BaseRepository(IUnitOfWork uow)
         {
             _uow = uow;
@@ -46,14 +47,20 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
 
         public async Task<ApiResultList<T>> GetListAsync(PaginationDto pagination)
         {
-            var query = _dbSet.AsNoTracking().OrderByDescending(c => c.Id).AsQueryable();
-            var result = await query.Skip(pagination.PageIndex).Take(pagination.PageSize).ToListAsync();
+            var query = _dbSet
+                .AsNoTracking()
+                .OrderByDescending(c => c.Id)
+                .AsQueryable();
+
+            var result = await query.Skip(pagination.PageIndex)
+                .Take(pagination.PageSize)
+                .ToListAsync();
 
             return new ApiResultList<T>
             {
                 Result = result,
                 FilteredCount = result.Count,
-                TotalCount = result.Count()
+                TotalCount = query.Count()
             };
         }
 
