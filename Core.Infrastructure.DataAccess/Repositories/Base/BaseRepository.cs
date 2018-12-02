@@ -45,7 +45,7 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             return entity.Id;
         }
 
-        public async Task<ApiResultList<T>> GetListAsync(PaginationDto pagination)
+        public virtual async Task<ApiResultList<T>> GetListAsync(PaginationDto pagination)
         {
             var query = _dbSet
                 .AsNoTracking()
@@ -77,7 +77,7 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             return entity.Id;
         }
 
-        public async Task<Type> UpdateRangeAsync(List<T> items)
+        public virtual async Task<Type> UpdateRangeAsync(List<T> items)
         {
             _dbSet.UpdateRange(items);
             await _uow.SaveChangesAsync();
@@ -94,7 +94,7 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             return _dbSet.Find(id);
         }
 
-        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        public virtual async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
         {
             return await _dbSet.AnyAsync(expression);
         }
