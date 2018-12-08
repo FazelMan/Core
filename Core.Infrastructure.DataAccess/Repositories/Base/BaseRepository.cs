@@ -49,7 +49,7 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
         {
             foreach (var item in list)
             {
-                var entity = await _dbSet.FindAsync(item);
+                var entity = await _dbSet.FindAsync(item.Id);
                 entity.IsRemoved = true;
                 _uow.SaveChanges();
             }
