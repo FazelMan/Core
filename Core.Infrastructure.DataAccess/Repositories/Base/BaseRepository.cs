@@ -45,6 +45,16 @@ namespace Core.Infrastructure.DataAccess.Repositories.Base
             return entity.Id;
         }
 
+        public virtual async Task DeleteRangeAsync(List<T> list)
+        {
+            foreach (var item in list)
+            {
+                var entity = await _dbSet.FindAsync(item);
+                entity.IsRemoved = true;
+                _uow.SaveChanges();
+            }
+        }
+
         public virtual async Task<ApiResultList<T>> GetListAsync(PaginationDto pagination)
         {
             var query = _dbSet

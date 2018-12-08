@@ -20,6 +20,7 @@ namespace Core.Domain.Abstract.Repositories.Base
         T Find(Type id);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task<Type> DeleteAsync(Type id);
+        Task DeleteRangeAsync(List<T> list);
         Task<Type> UpdateAsync(T entity);
         Task<Type> UpdateRangeAsync(List<T> items);
         IQueryable<T> GetDbSet(Expression<Func<T, bool>> expression);
