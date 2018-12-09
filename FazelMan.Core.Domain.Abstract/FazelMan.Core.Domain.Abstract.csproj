@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>FazelMan</Authors>
+    <Product></Product>
+    <Company></Company>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>FazelMan.Core.Domain.Abstract</PackageId>
+    <Version>1.0.5</Version>
+    <RepositoryUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Core.Domain.Abstract</RepositoryUrl>
+    <PackageIconUrl>https://avatars0.githubusercontent.com/u/6755352?s=400&amp;u=411d14a6e936a9afe8ad9ad793524f4ea761a8fa&amp;v=4</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Core.Domain.Abstract</PackageProjectUrl>
+    <Description>FazelMan.Core.Domain.Abstract</Description>
+    <AssemblyName>FazelMan.Core.Domain.Abstract</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FazelMan.Core.Common\FazelMan.Core.Common.csproj" />
+    <ProjectReference Include="..\FazelMan.Core.Domain.Dto\FazelMan.Core.Domain.Dto.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>FazelMan</Authors>
+    <Product></Product>
+    <Company></Company>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>FazelMan.Core.Infrastructure.DataAccess</PackageId>
+    <Version>1.0.8</Version>
+    <RepositoryUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Core.Infrastructure.DataAccess</RepositoryUrl>
+    <PackageIconUrl>https://avatars0.githubusercontent.com/u/6755352?s=400&amp;u=411d14a6e936a9afe8ad9ad793524f4ea761a8fa&amp;v=4</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Core.Infrastructure.DataAccess</PackageProjectUrl>
+    <Description>FazelMan.Core.Infrastructure.DataAccess</Description>
+    <AssemblyName>FazelMan.Core.Infrastructure.DataAccess</AssemblyName>
+    <RootNamespace>FazelMan.Core.Infrastructure.DataAccess</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FazelMan.Core.Domain.Abstract\FazelMan.Core.Domain.Abstract.csproj" />
+    <ProjectReference Include="..\FazelMan.Core.Domain.Dto\FazelMan.Core.Domain.Dto.csproj" />
+    <ProjectReference Include="..\FazelMan.Core.Domain.Entity\FazelMan.Core.Domain.Entity.csproj" />
+  </ItemGroup>
+
+</Project>
