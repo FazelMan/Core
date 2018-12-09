@@ -1,4 +1,4 @@
-﻿namespace Core.Common.Enums
+﻿namespace FazelMan.Core.Common.Enums
 {
     public enum MethodType
     {

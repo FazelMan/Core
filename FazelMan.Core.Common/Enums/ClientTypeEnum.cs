@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Common.Enums
+namespace FazelMan.Core.Common.Enums
 {
     public enum ClientTypeEnum
     {

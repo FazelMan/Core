@@ -2,7 +2,7 @@
 using CoreApp.Api.Helper;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Common.CustomConfiguration
+namespace FazelMan.Core.Common.CustomConfiguration
 {
     public class CustomConfiguration : ICustomConfiguration
     {

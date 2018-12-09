@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Common.ApiResult
+namespace FazelMan.Core.Common.ApiResult
 {
     public class ApiResult
     {

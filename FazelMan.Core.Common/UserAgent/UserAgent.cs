@@ -1,7 +1,7 @@
 ﻿using Core.Common.Enums;
 using Core.Common.Extentions;
 
-namespace Core.Common.UserAgent
+namespace FazelMan.Core.Common.UserAgent
 {
     public static class UserAgent
     {

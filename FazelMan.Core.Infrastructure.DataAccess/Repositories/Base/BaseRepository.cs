@@ -11,7 +11,7 @@ using Core.Domain.Entity.Base;
 using Core.Infrastructure.DataAccess.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Infrastructure.DataAccess.Repositories.Base
+namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
 {
     public abstract class BaseRepository<T, Type> : IBaseRepository<T, Type> where T : BaseEntity<Type>, new()
     {

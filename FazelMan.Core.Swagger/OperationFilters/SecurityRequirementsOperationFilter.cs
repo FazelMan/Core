@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Core.Swagger.OperationFilters
+namespace FazelMan.Core.Swagger.OperationFilters
 {
     public class SecurityRequirementsOperationFilter : IOperationFilter
     {

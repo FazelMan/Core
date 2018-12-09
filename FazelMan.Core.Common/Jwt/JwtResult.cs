@@ -1,4 +1,4 @@
-﻿namespace Core.Common.Jwt
+﻿namespace FazelMan.Core.Common.Jwt
 {
 
     public class JwtResult

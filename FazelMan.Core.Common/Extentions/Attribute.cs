@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Core.Common.Extentions
+namespace FazelMan.Core.Common.Extentions
 {
     public static class Attributes
     {

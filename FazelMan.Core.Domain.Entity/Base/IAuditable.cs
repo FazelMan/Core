@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Domain.Entity.Base
+namespace FazelMan.Core.Domain.Entity.Base
 {
     public interface IAuditable
     {

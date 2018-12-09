@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Core.Common.Enums;
 
-namespace Core.Common.Extentions
+namespace FazelMan.Core.Common.Extentions
 {
     public static class RegexExtention
     {

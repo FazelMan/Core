@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Common.Dto.Api
+namespace FazelMan.Core.Common.Dto.Api
 {
     public class PaginationDto
     {

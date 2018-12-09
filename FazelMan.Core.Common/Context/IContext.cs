@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 
-namespace Core.Common.Context
+namespace FazelMan.Core.Common.Context
 {
     public interface IContext
     {

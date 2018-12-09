@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Domain.Dto
+namespace FazelMan.Core.Domain.Dto
 {
     public class SearchParameters<T>
     {

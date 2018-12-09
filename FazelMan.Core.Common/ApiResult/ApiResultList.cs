@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Core.Common.ApiResult
+namespace FazelMan.Core.Common.ApiResult
 {
     public class ApiResultList
     {

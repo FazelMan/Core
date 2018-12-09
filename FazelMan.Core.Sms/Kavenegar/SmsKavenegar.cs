@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Kavenegar;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Sms.Kavenegar
+namespace FazelMan.Core.Sms.Kavenegar
 {
     public class SmsKavenegar
     {

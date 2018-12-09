@@ -4,7 +4,7 @@ using Core.Common.Enums;
 using HashidsNet;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Common.Cryptography
+namespace FazelMan.Core.Common.Cryptography
 {
     public class CryptographyService : ICryptographyService
     {

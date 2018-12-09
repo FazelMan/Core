@@ -1,4 +1,4 @@
-﻿namespace Core.Common.Dto.Banks
+﻿namespace FazelMan.Core.Common.Dto.Banks
 {
     public class Passargad
     {

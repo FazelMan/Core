@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Versioning;
 
-namespace Core.Swagger.OperationFilters
+namespace FazelMan.Core.Swagger.OperationFilters
 {
     public static class ActionDescriptorExtensions
     {

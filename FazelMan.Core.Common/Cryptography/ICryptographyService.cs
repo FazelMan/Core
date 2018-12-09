@@ -1,6 +1,6 @@
 ﻿using Core.Common.Enums;
 
-namespace Core.Common.Cryptography
+namespace FazelMan.Core.Common.Cryptography
 {
     public interface ICryptographyService
     {

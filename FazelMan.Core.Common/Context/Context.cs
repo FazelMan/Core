@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace Core.Common.Context
+namespace FazelMan.Core.Common.Context
 {
     public class Context : IContext
     {

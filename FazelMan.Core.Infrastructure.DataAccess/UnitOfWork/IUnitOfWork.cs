@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Core.Infrastructure.DataAccess.UnitOfWork
+namespace FazelMan.Core.Infrastructure.DataAccess.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {

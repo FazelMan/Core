@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using NETCore.ToolKit;
 using NETCore.ToolKit.Extensions;
 
-namespace Core.Common.Extentions
+namespace FazelMan.Core.Common.Extentions
 {
     public static class RsaKeyExtensions
     {

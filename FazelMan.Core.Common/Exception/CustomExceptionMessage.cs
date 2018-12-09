@@ -2,7 +2,7 @@
 using Core.Common.Enums;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Common.Exception
+namespace FazelMan.Core.Common.Exception
 {
     public static class CustomExceptionMessage
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Core.Swagger.OperationFilters
+namespace FazelMan.Core.Swagger.OperationFilters
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public class SwaggerResponseAttribute : Attribute

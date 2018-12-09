@@ -8,7 +8,7 @@ using Core.Common.ApiResult;
 using Core.Domain.Dto;
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Domain.Abstract.Repositories.Base
+namespace FazelMan.Core.Domain.Abstract.Repositories.Base
 {
     public interface IBaseRepository<T, Type> where T : class
     {

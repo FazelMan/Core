@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Core.Common.Extentions
+namespace FazelMan.Core.Common.Extentions
 {
     public static class EnumExtention
     {
