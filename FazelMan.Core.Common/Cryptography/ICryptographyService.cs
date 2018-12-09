@@ -1,4 +1,4 @@
-﻿using Core.Common.Enums;
+﻿using FazelMan.Core.Common.Enums;
 
 namespace FazelMan.Core.Common.Cryptography
 {

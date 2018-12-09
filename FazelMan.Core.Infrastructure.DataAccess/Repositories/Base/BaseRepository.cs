@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Core.Common.ApiResult;
-using Core.Common.Dto.Api;
-using Core.Domain.Abstract.Repositories.Base;
-using Core.Domain.Dto;
-using Core.Domain.Entity.Base;
-using Core.Infrastructure.DataAccess.UnitOfWork;
+using FazelMan.Core.Common.ApiResult;
+using FazelMan.Core.Common.Dto.Api;
+using FazelMan.Core.Domain.Abstract.Repositories.Base;
+using FazelMan.Core.Domain.Dto;
+using FazelMan.Core.Domain.Entity.Base;
+using FazelMan.Core.Infrastructure.DataAccess.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base

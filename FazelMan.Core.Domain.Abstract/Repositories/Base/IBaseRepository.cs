@@ -1,11 +1,11 @@
-﻿using Core.Common.Dto.Api;
+﻿using FazelMan.Core.Common.Dto.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Core.Common.ApiResult;
-using Core.Domain.Dto;
+using FazelMan.Core.Common.ApiResult;
+using FazelMan.Core.Domain.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace FazelMan.Core.Domain.Abstract.Repositories.Base

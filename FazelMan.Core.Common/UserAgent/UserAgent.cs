@@ -1,5 +1,5 @@
-﻿using Core.Common.Enums;
-using Core.Common.Extentions;
+﻿using FazelMan.Core.Common.Enums;
+using FazelMan.Core.Common.Extentions;
 
 namespace FazelMan.Core.Common.UserAgent
 {

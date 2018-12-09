@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.Common.Enums;
+using FazelMan.Core.Common.Enums;
 using Microsoft.Extensions.Configuration;
 
 namespace FazelMan.Core.Common.Exception

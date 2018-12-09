@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core.Common.Enums;
+using FazelMan.Core.Common.Enums;
 using HashidsNet;
 using Microsoft.Extensions.Configuration;
 

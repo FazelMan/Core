@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using Core.Common.Enums;
+using FazelMan.Core.Common.Enums;
 
 namespace FazelMan.Core.Common.Extentions
 {
