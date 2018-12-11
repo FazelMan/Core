@@ -62,7 +62,8 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
                 .OrderByDescending(c => c.Id)
                 .AsQueryable();
 
-            var result = await query.Skip(pagination.PageIndex)
+            var result = await query
+                .Skip((pagination.PageIndex - 1) * pagination.PageSize)
                 .Take(pagination.PageSize)
                 .ToListAsync();
 
