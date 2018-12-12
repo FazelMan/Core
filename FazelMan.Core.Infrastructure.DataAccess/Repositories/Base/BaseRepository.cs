@@ -24,28 +24,28 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
             _dbSet = _uow.Set<T>();
         }
 
-        public virtual async Task<T> InsertAsync(T entity)
+        public virtual async Task<T> InsertAsync(T entity, bool isSave = true)
         {
             await _dbSet.AddAsync(entity);
-            await _uow.SaveChangesAsync();
+            if (isSave) await _uow.SaveChangesAsync();
             return entity;
         }
 
-        public virtual async Task InsertRangeAsync(List<T> entity)
+        public virtual async Task InsertRangeAsync(List<T> entity, bool isSave = true)
         {
             await _dbSet.AddRangeAsync(entity);
-            await _uow.SaveChangesAsync();
+            if (isSave) await _uow.SaveChangesAsync();
         }
 
-        public virtual async Task<Type> DeleteAsync(Type id)
+        public virtual async Task<Type> DeleteAsync(Type id, bool isSave = true)
         {
             var entity = await _dbSet.FindAsync(id);
             entity.IsRemoved = true;
-            _uow.SaveChanges();
+            if (isSave) _uow.SaveChanges();
             return entity.Id;
         }
 
-        public virtual async Task DeleteRangeAsync(List<T> list)
+        public virtual async Task DeleteRangeAsync(List<T> list, bool isSave = true)
         {
             foreach (var item in list)
             {
@@ -75,7 +75,7 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
             };
         }
 
-        public virtual async Task<Type> UpdateAsync(T entity)
+        public virtual async Task<Type> UpdateAsync(T entity, bool isSave = true)
         {
             var model = await FindAsync(entity.Id);
             if (model == null)
@@ -83,15 +83,15 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
                 return default(Type); //equal null
             }
             _uow.Entry(model).CurrentValues.SetValues(entity);
-            await _uow.SaveChangesAsync();
+            if (isSave) await _uow.SaveChangesAsync();
 
             return entity.Id;
         }
 
-        public virtual async Task<Type> UpdateRangeAsync(List<T> items)
+        public virtual async Task<Type> UpdateRangeAsync(List<T> items, bool isSave = true)
         {
             _dbSet.UpdateRange(items);
-            await _uow.SaveChangesAsync();
+            if (isSave) await _uow.SaveChangesAsync();
             return default(Type);
         }
 
