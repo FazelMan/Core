@@ -8,5 +8,6 @@ namespace FazelMan.Core.Domain.Entity.Base
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime? UpdateDate { get; set; }
         public bool IsRemoved { get; set; } = false;
+        public int? Priority { get; set; }
     }
 }

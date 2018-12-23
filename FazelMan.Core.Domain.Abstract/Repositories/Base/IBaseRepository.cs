@@ -14,8 +14,8 @@ namespace FazelMan.Core.Domain.Abstract.Repositories.Base
     {
         Task<T> InsertAsync(T entity, bool isSave = true);
         Task InsertRangeAsync(List<T> entity, bool isSave = true);
-        Task<ApiResultList<T>> GetListAsync(PaginationDto pagination);
-        Task<ApiResultList<T>> GetListAsync();
+        Task<ApiResultList<T>> GetListAsync(PaginationDto pagination, bool isSortedByPriority = true, bool isSortedByCreateDate = false);
+        Task<ApiResultList<T>> GetListAsync(bool isSortedByPriority = true, bool isSortedByCreateDate = false);
         Task<T> FindAsync(Type id);
         T Find(Type id);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
