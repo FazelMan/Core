@@ -56,15 +56,13 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
 
         public virtual async Task<ApiResultList<T>> GetListAsync(PaginationDto pagination, bool isSortedByPriority = true, bool isSortedByCreateDate = false)
         {
-            var query = _dbSet
-                .AsNoTracking()
-                .OrderByDescending(x => x.Id);
+            var query = _dbSet.AsNoTracking();
 
             if (isSortedByPriority)
-                query = query.ThenByDescending(x => x.Priority.Value);
+                query = query.OrderByDescending(x => x.Priority);
 
             if (isSortedByCreateDate)
-                query = query.ThenByDescending(x => x.CreatedDate);
+                query = query.OrderByDescending(x => x.CreatedDate);
 
             var result = await query
             .Skip((pagination.PageIndex - 1) * pagination.PageSize)
@@ -81,16 +79,13 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
 
         public virtual async Task<ApiResultList<T>> GetListAsync(bool isSortedByPriority = true, bool isSortedByCreateDate = false)
         {
-            var query = _dbSet
-                .OrderByDescending(x => x.Priority.HasValue)
-                .AsNoTracking()
-                .OrderByDescending(c => c.Id);
+            var query = _dbSet.AsNoTracking();
 
             if (isSortedByPriority)
-                query = query.ThenByDescending(x => x.Priority.Value);
+                query = query.OrderByDescending(x => x.Priority);
 
             if (isSortedByCreateDate)
-                query = query.ThenByDescending(x => x.CreatedDate);
+                query = query.OrderByDescending(x => x.CreatedDate);
 
             var result = await query.ToListAsync();
 
