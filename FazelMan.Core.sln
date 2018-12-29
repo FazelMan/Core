@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FazelMan.Core.Domain.Dto", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FazelMan.Core.Domain.Entity", "FazelMan.Core.Domain.Entity\FazelMan.Core.Domain.Entity.csproj", "{FAC1908D-406E-4CCB-9764-4A6DCAA79789}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D8690324-BEAE-4BBA-9A25-0CE08031A6AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FazelMan.Core.Common.Tests", "FazelMan.Core.Common.Tests\FazelMan.Core.Common.Tests.csproj", "{DCC9DEC1-6BE1-4D49-978C-43FC001A09A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FazelMan.Core.Tests", "FazelMan.Tests\FazelMan.Core.Tests.csproj", "{70E17D1C-E596-4542-A015-04B57EC2CF48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,9 +57,21 @@ Global
 		{FAC1908D-406E-4CCB-9764-4A6DCAA79789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAC1908D-406E-4CCB-9764-4A6DCAA79789}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAC1908D-406E-4CCB-9764-4A6DCAA79789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC9DEC1-6BE1-4D49-978C-43FC001A09A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC9DEC1-6BE1-4D49-978C-43FC001A09A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC9DEC1-6BE1-4D49-978C-43FC001A09A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC9DEC1-6BE1-4D49-978C-43FC001A09A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70E17D1C-E596-4542-A015-04B57EC2CF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70E17D1C-E596-4542-A015-04B57EC2CF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70E17D1C-E596-4542-A015-04B57EC2CF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70E17D1C-E596-4542-A015-04B57EC2CF48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DCC9DEC1-6BE1-4D49-978C-43FC001A09A4} = {D8690324-BEAE-4BBA-9A25-0CE08031A6AE}
+		{70E17D1C-E596-4542-A015-04B57EC2CF48} = {D8690324-BEAE-4BBA-9A25-0CE08031A6AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E33258D9-5DE3-4A4A-A2EF-2CC2628F1E3C}
