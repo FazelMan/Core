@@ -14,31 +14,31 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
 {
     public abstract class BaseRepository<T, Type> : IBaseRepository<T, Type> where T : BaseEntity<Type>, new()
     {
-        private readonly DbSet<T> _dbSet;
+        public DbSet<T> Table;
         private readonly IUnitOfWork _uow;
 
         protected BaseRepository(IUnitOfWork uow)
         {
             _uow = uow;
-            _dbSet = _uow.Set<T>();
+            Table = _uow.Set<T>();
         }
 
         public virtual async Task<T> InsertAsync(T entity, bool isSave = true)
         {
-            await _dbSet.AddAsync(entity);
+            await Table.AddAsync(entity);
             if (isSave) await _uow.SaveChangesAsync();
             return entity;
         }
 
         public virtual async Task InsertRangeAsync(List<T> entity, bool isSave = true)
         {
-            await _dbSet.AddRangeAsync(entity);
+            await Table.AddRangeAsync(entity);
             if (isSave) await _uow.SaveChangesAsync();
         }
 
         public virtual async Task<Type> DeleteAsync(Type id, bool isSave = true)
         {
-            var entity = await _dbSet.FindAsync(id);
+            var entity = await Table.FindAsync(id);
             entity.IsRemoved = true;
             if (isSave) _uow.SaveChanges();
             return entity.Id;
@@ -48,7 +48,7 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
         {
             foreach (var item in list)
             {
-                var entity = await _dbSet.FindAsync(item.Id);
+                var entity = await Table.FindAsync(item.Id);
                 entity.IsRemoved = true;
                 _uow.SaveChanges();
             }
@@ -56,7 +56,7 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
 
         public virtual async Task<ApiResultList<T>> GetListAsync(PaginationDto pagination, bool isSortedByPriority = true, bool isSortedByCreateDate = false)
         {
-            var query = _dbSet.AsNoTracking();
+            var query = Table.AsNoTracking();
 
             if (isSortedByPriority)
                 query = query.OrderByDescending(x => x.Priority);
@@ -79,7 +79,7 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
 
         public virtual async Task<ApiResultList<T>> GetListAsync(bool isSortedByPriority = true, bool isSortedByCreateDate = false)
         {
-            var query = _dbSet.AsNoTracking();
+            var query = Table.AsNoTracking();
 
             if (isSortedByPriority)
                 query = query.OrderByDescending(x => x.Priority);
@@ -112,39 +112,57 @@ namespace FazelMan.Core.Infrastructure.DataAccess.Repositories.Base
 
         public virtual async Task<Type> UpdateRangeAsync(List<T> items, bool isSave = true)
         {
-            _dbSet.UpdateRange(items);
+            Table.UpdateRange(items);
             if (isSave) await _uow.SaveChangesAsync();
             return default(Type);
         }
 
         public virtual async Task<T> FindAsync(Type id)
         {
-            return await _dbSet.FindAsync(id);
+            return await Table.FindAsync(id);
         }
 
         public virtual T Find(Type id)
         {
-            return _dbSet.Find(id);
+            return Table.Find(id);
         }
 
         public virtual async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
         {
-            return await _dbSet.AnyAsync(expression);
+            return await Table.AnyAsync(expression);
         }
 
-        public virtual IQueryable<T> GetDbSet(Expression<Func<T, bool>> expression)
+        public virtual IQueryable<T> GetAll()
         {
-            IQueryable<T> localEntities = _dbSet.AsQueryable();
-            if (expression != null)
+            return Table;
+        }
+
+        public virtual IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] propertySelectors)
+        {
+            if (propertySelectors == null || propertySelectors.Length <= 0)
             {
-                localEntities = localEntities.Where(expression);
+                return GetAll();
             }
-            return localEntities;
+
+            var query = GetAll();
+
+            foreach (var propertySelector in propertySelectors)
+            {
+                query = query.Include(propertySelector);
+            }
+
+            return query;
         }
 
-        public virtual DbSet<T> GetDbSet()
+        public virtual async Task<List<T>> GetAllListAsync()
         {
-            return _dbSet;
+            return await GetAll().ToListAsync();
         }
+
+        public virtual async Task<List<T>> GetAllListAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await GetAll().Where(predicate).ToListAsync();
+        }
+
     }
 }

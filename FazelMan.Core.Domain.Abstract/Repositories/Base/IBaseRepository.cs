@@ -23,7 +23,9 @@ namespace FazelMan.Core.Domain.Abstract.Repositories.Base
         Task DeleteRangeAsync(List<T> list, bool isSave = true);
         Task<Type> UpdateAsync(T entity, bool isSave = true);
         Task<Type> UpdateRangeAsync(List<T> items, bool isSave = true);
-        IQueryable<T> GetDbSet(Expression<Func<T, bool>> expression);
-        DbSet<T> GetDbSet();
+        IQueryable<T> GetAll();
+        IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] propertySelectors);
+        Task<List<T>> GetAllListAsync();
+        Task<List<T>> GetAllListAsync(Expression<Func<T, bool>> predicate);
     }
 }
