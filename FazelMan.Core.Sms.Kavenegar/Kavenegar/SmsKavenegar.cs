@@ -9,14 +9,14 @@ namespace FazelMan.Core.Sms.Kavenegar.Kavenegar
     {
         private readonly IConfiguration _configuration;
 
-        public static string ApiKey { get; set; }
-        public string PhoneNumber { get; set; }
-        public static string URL { get; set; }
+        private static string ApiKey { get; set; }
+        private string PhoneNumber { get; set; }
+        private static string Url { get; set; }
 
         public SmsKavenegar(IConfiguration configuration)
         {
             _configuration = configuration;
-            URL = _configuration["Sms:Kavenegar:URL"];
+            Url = _configuration["Sms:Kavenegar:URL"];
             PhoneNumber = _configuration["Sms:Kavenegar:PhoneNumber"];
             ApiKey = _configuration["Sms:Kavenegar:ApiKey"];
         }
