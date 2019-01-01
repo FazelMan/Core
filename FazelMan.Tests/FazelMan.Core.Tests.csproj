@@ -17,8 +17,4 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.11.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FazelMan.Core.Domain.Entity\FazelMan.Core.Domain.Entity.csproj" />
-  </ItemGroup>
-
 </Project>

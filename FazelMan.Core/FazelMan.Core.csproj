@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>FazelMan</Authors>
+    <Product></Product>
+    <PackageId>FazelMan.Core</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://avatars0.githubusercontent.com/u/6755352?s=400&amp;u=411d14a6e936a9afe8ad9ad793524f4ea761a8fa&amp;v=4</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Core</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Core</RepositoryUrl>
+    <Version>1.0.0</Version>
+    <Company></Company>
+    <Description>FazelMan.Core</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hashids.net" Version="1.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="1.1.0" />
+    <PackageReference Include="NETCore.ToolKit" Version="1.0.2" />
+    <PackageReference Include="System.IO.FileSystem.AccessControl" Version="4.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+</Project>

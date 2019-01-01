@@ -18,8 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FazelMan.Core.Domain.Abstract\FazelMan.Core.Domain.Abstract.csproj" />
-    <ProjectReference Include="..\FazelMan.Core.Domain.Dto\FazelMan.Core.Domain.Dto.csproj" />
-    <ProjectReference Include="..\FazelMan.Core.Domain.Entity\FazelMan.Core.Domain.Entity.csproj" />
   </ItemGroup>
 
 </Project>

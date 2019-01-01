@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <Authors>FazelMan</Authors>
@@ -9,9 +8,9 @@
     <PackageIconUrl>https://avatars0.githubusercontent.com/u/6755352?s=400&amp;u=411d14a6e936a9afe8ad9ad793524f4ea761a8fa&amp;v=4</PackageIconUrl>
     <PackageProjectUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Core.Sms.Kavenegar</PackageProjectUrl>
     <RepositoryUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Core.Sms.Kavenegar</RepositoryUrl>
-    <Version>1.0.4</Version>
+    <Version>1.0.0</Version>
     <Company></Company>
-    <Description>FazelMan.Core.Sms</Description>
+    <Description>FazelMan.Core.Sms.Kavenegar</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,5 +22,4 @@
   <ItemGroup>
     <ProjectReference Include="..\FazelMan.Core\FazelMan.Core.csproj" />
   </ItemGroup>
-
 </Project>
