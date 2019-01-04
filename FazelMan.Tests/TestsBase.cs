@@ -2,7 +2,7 @@
 using Moq;
 using NUnit.Framework;
 
-namespace FazelMan.Core.Tests
+namespace FazelMan.Tests
 {
     public abstract class TestsBase
     {

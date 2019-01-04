@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>FazelMan</Authors>
+    <Company></Company>
+    <Product></Product>
+    <PackageId>FazelMan.Swagger</PackageId>
+    <PackageIconUrl>https://avatars0.githubusercontent.com/u/6755352?s=400&amp;u=411d14a6e936a9afe8ad9ad793524f4ea761a8fa&amp;v=4</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Swagger</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/FazelMan/Core/tree/master/FazelMan.Swagger</RepositoryUrl>
+    <Version>1.0.5</Version>
+    <Description>FazelMan.Swagger</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
+  </ItemGroup>
+
+</Project>

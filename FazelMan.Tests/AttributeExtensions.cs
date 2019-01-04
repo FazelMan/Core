@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace FazelMan.Core.Tests
+namespace FazelMan.Tests
 {
     public static class AttributeExtensions
     {

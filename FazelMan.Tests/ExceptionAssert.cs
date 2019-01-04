@@ -2,7 +2,7 @@
 using System.Reflection;
 using NUnit.Framework;
 
-namespace FazelMan.Core.Tests
+namespace FazelMan.Tests
 {
     /// <summary>
     /// Contains exception assertions used for unit testing.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
-namespace FazelMan.Core.Tests
+namespace FazelMan.Tests
 {
     public static class TestExtensions
     {
