@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AttributeExtensions.cs" />
+    <Compile Remove="ExceptionAssert.cs" />
+    <Compile Remove="TestsBase.cs" />
+    <Compile Remove="TypeAssert.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="NUnit" Version="3.11.0" />

@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FazelMan", "FazelMan\FazelM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FazelMan.Sms.Kavenegar", "FazelMan.Sms.Kavenegar\FazelMan.Sms.Kavenegar.csproj", "{26C8F039-6FAD-4CF8-8329-F73A7BB470EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FazelMan.EntityFrameworkCore", "FazelMan.EntityFrameworkCore\FazelMan.EntityFrameworkCore.csproj", "{E7F08C7D-AEAA-44F0-A6AE-F03AA86EECD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FazelMan.EntityFrameworkCore", "FazelMan.EntityFrameworkCore\FazelMan.EntityFrameworkCore.csproj", "{E7F08C7D-AEAA-44F0-A6AE-F03AA86EECD0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{66BBCF2A-8752-49C4-89F5-742D638A44B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{70E17D1C-E596-4542-A015-04B57EC2CF48} = {66BBCF2A-8752-49C4-89F5-742D638A44B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E33258D9-5DE3-4A4A-A2EF-2CC2628F1E3C}
