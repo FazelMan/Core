@@ -16,9 +16,9 @@ namespace FazelMan.Sms.Kavenegar.Kavenegar
         public SmsKavenegar(IConfiguration configuration)
         {
             _configuration = configuration;
-            Url = _configuration["Sms:Kavenegar:URL"];
-            PhoneNumber = _configuration["Sms:Kavenegar:PhoneNumber"];
-            ApiKey = _configuration["Sms:Kavenegar:ApiKey"];
+            Url = _configuration["FazelMan:Sms.Kavenegar:URL"];
+            PhoneNumber = _configuration["FazelMan:Sms.Kavenegar:PhoneNumber"];
+            ApiKey = _configuration["FazelMan:Sms.Kavenegar:ApiKey"];
         }
 
         public async Task<bool> SendAsync(string templateName, string phoneNumber, string value)
@@ -26,7 +26,7 @@ namespace FazelMan.Sms.Kavenegar.Kavenegar
             try
             {
                 var api = new KavenegarApi(ApiKey);
-                var smsTemplateName = _configuration["Sms:Kavenegar:Templates:" + templateName];
+                var smsTemplateName = _configuration["FazelMan:Sms.Kavenegar:Templates:" + templateName];
                 await api.VerifyLookup(phoneNumber, value.Trim(), smsTemplateName);
                 return true;
             }
@@ -54,7 +54,7 @@ namespace FazelMan.Sms.Kavenegar.Kavenegar
             try
             {
                 var api = new KavenegarApi(ApiKey);
-                var smsTemplateName = _configuration["Sms:Kavenegar:Templates:" + templateName];
+                var smsTemplateName = _configuration["FazelMan:Sms.Kavenegar:Templates:" + templateName];
                 
                 await api.VerifyLookup(phoneNumber, values[0].Trim(), values[1].Trim(), values[2].Trim(), values[3].Trim(), smsTemplateName);
                 return true;
