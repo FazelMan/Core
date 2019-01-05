@@ -10,7 +10,7 @@ using FazelMan.Domain.Uow;
 using FazelMan.Dto.Api;
 using Microsoft.EntityFrameworkCore;
 
-namespace FazelMan.EntityFrameworkCore.EntityFrameworkCore.Repositories
+namespace FazelMan.EntityFrameworkCore.Repositories
 {
     public abstract class BaseRepository<T, Type> : IBaseRepository<T, Type> where T : BaseEntity<Type>, new()
     {
