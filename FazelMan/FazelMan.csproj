@@ -11,7 +11,7 @@
     <Version>1.0.0.1</Version>
     <Company></Company>
     <Description>FazelMan</Description>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
