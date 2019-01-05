@@ -4,12 +4,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace FazelMan.Cryptography
 {
-    public class CryptographyService : ICryptographyService
+    public class HashidsService : IHashidsService
     {
         private readonly IConfiguration _configuration;
         Hashids _hashids;
 
-        public CryptographyService(IConfiguration configuration)
+        public HashidsService(IConfiguration configuration)
         {
             _configuration = configuration;
 
@@ -17,9 +17,9 @@ namespace FazelMan.Cryptography
 
         public string Encrypt(string template, int value)
         {
-            var hashIdKey = _configuration[template + ":Key"];
-            var hashIdLenght = int.Parse(_configuration[template + ":Lenght"]);
-            var hashIdAcceptedAlphabet = _configuration[template + ":AcceptedAlphabet"];
+            var hashIdKey = _configuration["FazelMan:Cryptography:HashIds:" + template + ":Key"];
+            var hashIdLenght = int.Parse(_configuration["FazelMan:Cryptography:HashIds:" + template + ":Lenght"]);
+            var hashIdAcceptedAlphabet = _configuration["FazelMan:Cryptography:HashIds:" + template + ":AcceptedAlphabet"];
 
             _hashids = new Hashids(hashIdKey, hashIdLenght, hashIdAcceptedAlphabet);
             return EncryptHashids(value);
@@ -27,9 +27,9 @@ namespace FazelMan.Cryptography
 
         public int Decrypt(string template, string value)
         {
-            var hashIdKey = _configuration[template + ":Key"];
-            var hashIdLenght = int.Parse(_configuration[template + ":Lenght"]);
-            var hashIdAcceptedAlphabet = _configuration[template + ":AcceptedAlphabet"];
+            var hashIdKey = _configuration["FazelMan:Cryptography:HashIds:" + template + ":Key"];
+            var hashIdLenght = int.Parse(_configuration["FazelMan:Cryptography:HashIds:" + template + ":Lenght"]);
+            var hashIdAcceptedAlphabet = _configuration["FazelMan:Cryptography:HashIds:" + template + ":AcceptedAlphabet"];
 
             _hashids = new Hashids(hashIdKey, hashIdLenght, hashIdAcceptedAlphabet);
             return DecryptHashids(value);
