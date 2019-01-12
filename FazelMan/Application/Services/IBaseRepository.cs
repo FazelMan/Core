@@ -17,7 +17,7 @@ namespace FazelMan.Application.Services
         Task<T> FindAsync(Type id);
         T Find(Type id);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
-        Task<Type> DeleteAsync(Type id, bool isSave = true);
+        Task DeleteAsync(Type id, bool isSave = true);
         Task DeleteRangeAsync(List<T> list, bool isSave = true);
         Task<Type> UpdateAsync(T entity, bool isSave = true);
         Task<Type> UpdateRangeAsync(List<T> items, bool isSave = true);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 using FazelMan.Application.Services;
 using FazelMan.Application.Services.ApiResult;
@@ -36,21 +37,39 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             if (isSave) await _uow.SaveChangesAsync();
         }
 
-        public virtual async Task<Type> DeleteAsync(Type id, bool isSave = true)
+        public virtual async Task DeleteAsync(Type id, bool isSave = true)
         {
-            var entity = await Table.FindAsync(id);
-            //entity.IsRemoved = true;
-            if (isSave) _uow.SaveChanges();
-            return entity.Id;
+            var table = await Table.FindAsync(id);
+            PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
+            if (property != null)
+            {
+                property.SetValue(table.GetType(), true);
+                if (isSave) _uow.SaveChanges();
+            }
+            else
+            {
+                Table.Remove(table);
+                if (isSave) _uow.SaveChanges();
+            }
         }
+
 
         public virtual async Task DeleteRangeAsync(List<T> list, bool isSave = true)
         {
             foreach (var item in list)
             {
-                var entity = await Table.FindAsync(item.Id);
-                //entity.IsRemoved = true;
-                _uow.SaveChanges();
+                var table = await Table.FindAsync(item.Id);
+                PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
+                if (property != null)
+                {
+                    property.SetValue(table.GetType(), true);
+                    if (isSave) _uow.SaveChanges();
+                }
+                else
+                {
+                    Table.Remove(table);
+                    if (isSave) _uow.SaveChanges();
+                }
             }
         }
 
