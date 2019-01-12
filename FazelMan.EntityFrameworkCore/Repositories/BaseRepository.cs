@@ -9,6 +9,7 @@ using FazelMan.Application.Services.ApiResult;
 using FazelMan.Domain.Entities;
 using FazelMan.Domain.Uow;
 using FazelMan.Dto.Api;
+using FazelMan.Extentions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FazelMan.EntityFrameworkCore.Repositories
@@ -43,7 +44,7 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
             if (property != null)
             {
-                property.SetValue(table.GetType(), true);
+                SetValueWithReflectionExtention.SetValue(table, "IsRemoved", true);
                 if (isSave) _uow.SaveChanges();
             }
             else
@@ -53,7 +54,6 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             }
         }
 
-
         public virtual async Task DeleteRangeAsync(List<T> list, bool isSave = true)
         {
             foreach (var item in list)
@@ -62,7 +62,7 @@ namespace FazelMan.EntityFrameworkCore.Repositories
                 PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
                 if (property != null)
                 {
-                    property.SetValue(table.GetType(), true);
+                    SetValueWithReflectionExtention.SetValue(table, "IsRemoved", true);
                     if (isSave) _uow.SaveChanges();
                 }
                 else
