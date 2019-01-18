@@ -15,8 +15,8 @@ namespace FazelMan.Application.Services
         Task InsertRangeAsync(List<TEntity> entity, bool isSave = true);
         Task<ApiResultList<TEntity>> GetListAsync(PaginationDto pagination);
         Task<ApiResultList<TEntity>> GetListAsync();
-        Task<TEntity> FindAsync(TType id);
         TEntity Find(TType id);
+        Task<TEntity> FindAsync(TType id);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
         Task DeleteAsync(TType id, bool isSave = true);
         Task DeleteRangeAsync(List<TEntity> list, bool isSave = true);
