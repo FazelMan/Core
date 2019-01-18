@@ -14,33 +14,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FazelMan.EntityFrameworkCore.Repositories
 {
-    public abstract class BaseRepository<T, Type> : IBaseRepository<T, Type> where T : BaseEntity<Type>, new()
+    public abstract class EFCoreRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : BaseEntity<TType>
     {
-        public DbSet<T> Table;
+        private readonly DbSet<TEntity> _entities;
         private readonly IUnitOfWork _uow;
 
-        protected BaseRepository(IUnitOfWork uow)
+        protected EFCoreRepository(IUnitOfWork uow)
         {
             _uow = uow;
-            Table = _uow.Set<T>();
+            _entities = _uow.Set<TEntity>();
         }
 
-        public virtual async Task<T> InsertAsync(T entity, bool isSave = true)
+        public virtual async Task<TEntity> InsertAsync(TEntity entity, bool isSave = true)
         {
-            await Table.AddAsync(entity);
+            await _entities.AddAsync(entity);
             if (isSave) await _uow.SaveChangesAsync();
             return entity;
         }
 
-        public virtual async Task InsertRangeAsync(List<T> entity, bool isSave = true)
+        public virtual async Task InsertRangeAsync(List<TEntity> entity, bool isSave = true)
         {
-            await Table.AddRangeAsync(entity);
+            await _entities.AddRangeAsync(entity);
             if (isSave) await _uow.SaveChangesAsync();
         }
 
-        public virtual async Task DeleteAsync(Type id, bool isSave = true)
+        public virtual async Task DeleteAsync(TType id, bool isSave = true)
         {
-            var table = await Table.FindAsync(id);
+            var table = await _entities.FindAsync(id);
             PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
             if (property != null)
             {
@@ -49,16 +49,16 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             }
             else
             {
-                Table.Remove(table);
+                _entities.Remove(table);
                 if (isSave) _uow.SaveChanges();
             }
         }
 
-        public virtual async Task DeleteRangeAsync(List<T> list, bool isSave = true)
+        public virtual async Task DeleteRangeAsync(List<TEntity> list, bool isSave = true)
         {
             foreach (var item in list)
             {
-                var table = await Table.FindAsync(item.Id);
+                var table = await _entities.FindAsync(item.Id);
                 PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
                 if (property != null)
                 {
@@ -67,22 +67,22 @@ namespace FazelMan.EntityFrameworkCore.Repositories
                 }
                 else
                 {
-                    Table.Remove(table);
+                    _entities.Remove(table);
                     if (isSave) _uow.SaveChanges();
                 }
             }
         }
 
-        public virtual async Task<ApiResultList<T>> GetListAsync(PaginationDto pagination)
+        public virtual async Task<ApiResultList<TEntity>> GetListAsync(PaginationDto pagination)
         {
-            var query = Table.AsNoTracking();
+            var query = _entities.AsNoTracking();
 
             var result = await query
             .Skip((pagination.PageIndex - 1) * pagination.PageSize)
             .Take(pagination.PageSize)
             .ToListAsync();
 
-            return new ApiResultList<T>
+            return new ApiResultList<TEntity>
             {
                 Result = result,
                 FilteredCount = result.Count,
@@ -90,13 +90,13 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             };
         }
 
-        public virtual async Task<ApiResultList<T>> GetListAsync()
+        public virtual async Task<ApiResultList<TEntity>> GetListAsync()
         {
-            var query = Table.AsNoTracking();
+            var query = _entities.AsNoTracking();
 
             var result = await query.ToListAsync();
 
-            return new ApiResultList<T>
+            return new ApiResultList<TEntity>
             {
                 Result = result,
                 FilteredCount = result.Count,
@@ -104,12 +104,12 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             };
         }
 
-        public virtual async Task<Type> UpdateAsync(T entity, bool isSave = true)
+        public virtual async Task<TType> UpdateAsync(TEntity entity, bool isSave = true)
         {
             var model = await FindAsync(entity.Id);
             if (model == null)
             {
-                return default(Type); //equal null
+                return default(TType); //equal null
             }
             _uow.Entry(model).CurrentValues.SetValues(entity);
             if (isSave) await _uow.SaveChangesAsync();
@@ -117,41 +117,46 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             return entity.Id;
         }
 
-        public virtual async Task<Type> UpdateRangeAsync(List<T> items, bool isSave = true)
+        public virtual async Task<TType> UpdateRangeAsync(List<TEntity> items, bool isSave = true)
         {
-            Table.UpdateRange(items);
+            _entities.UpdateRange(items);
             if (isSave) await _uow.SaveChangesAsync();
-            return default(Type);
+            return default(TType);
         }
 
-        public virtual async Task<T> FindAsync(Type id)
+        public virtual async Task<TEntity> FindAsync(TType id)
         {
-            return await Table.FindAsync(id);
+            return await _entities.FindAsync(id);
         }
 
-        public virtual T Find(Type id)
+        public virtual TEntity Find(TType id)
         {
-            return Table.Find(id);
+            return _entities.Find(id);
         }
 
-        public virtual async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)
         {
-            return await Table.AnyAsync(expression);
+            return await _entities.AnyAsync(expression);
         }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual IQueryable<TEntity> Table()
         {
-            return Table;
+            return _entities;
         }
 
-        public virtual IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] propertySelectors)
+        public virtual IQueryable<TEntity> TableNoTracking()
+        {
+            return _entities.AsNoTracking();
+        }
+
+        public virtual IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors)
         {
             if (propertySelectors == null || propertySelectors.Length <= 0)
             {
-                return GetAll();
+                return Table();
             }
 
-            var query = GetAll();
+            var query = Table();
 
             foreach (var propertySelector in propertySelectors)
             {
@@ -161,14 +166,14 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             return query;
         }
 
-        public virtual async Task<List<T>> GetAllListAsync()
+        public virtual async Task<List<TEntity>> GetAllListAsync()
         {
-            return await GetAll().ToListAsync();
+            return await Table().ToListAsync();
         }
 
-        public virtual async Task<List<T>> GetAllListAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await GetAll().Where(predicate).ToListAsync();
+            return await Table().Where(predicate).ToListAsync();
         }
 
     }

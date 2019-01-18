@@ -15,7 +15,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Repositories\" />
+    <Compile Remove="Domain\Repositories\**" />
+    <EmbeddedResource Remove="Domain\Repositories\**" />
+    <None Remove="Domain\Repositories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Utility\" />
   </ItemGroup>
 
