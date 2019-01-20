@@ -17,7 +17,7 @@
   <ItemGroup>
     <PackageReference Include="Kavenegar.Core" Version="1.0.1-alpha2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
-    <PackageReference Include="NETCore.ToolKit" Version="1.0.2" />
+    <PackageReference Include="NETCore.ToolKit" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
