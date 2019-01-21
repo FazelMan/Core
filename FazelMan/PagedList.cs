@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nop.Core
+namespace FazelMan
 {
     /// <summary>
     /// Paged list

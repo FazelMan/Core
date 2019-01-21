@@ -16,7 +16,7 @@ namespace FazelMan.Infrastructure
     public class FileProviders : PhysicalFileProvider, IFileProviders
     {
         /// <summary>
-        /// Initializes a new instance of a NopFileProvider
+        /// Initializes a new instance of a FileProviders
         /// </summary>
         /// <param name="hostingEnvironment">Hosting environment</param>
         public FileProviders(IHostingEnvironment hostingEnvironment) 

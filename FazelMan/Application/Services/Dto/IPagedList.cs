@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Nop.Core
+namespace FazelMan.Application.Services.Dto
 {
     /// <summary>
     /// Paged list interface
