@@ -7,25 +7,23 @@ using FazelMan.Application.Services.ApiResult;
 using FazelMan.Domain.Entities;
 using FazelMan.Dto.Api;
 
-namespace FazelMan.Domain.Repositories
+namespace FazelMan.Application.Services
 {
-    public interface IRepository<TEntity, TPrimaryKey> : IRepository where TEntity : class, IEntity<TPrimaryKey>
+    public interface IRepository<TEntity, TType> where TEntity : BaseEntity<TType>
     {
         Task<TEntity> InsertAsync(TEntity entity, bool isSave = true);
-        TEntity Insert(TEntity entity, bool isSave = true);
         Task InsertRangeAsync(List<TEntity> entity, bool isSave = true);
         Task<ApiResultList<TEntity>> GetListAsync(PaginationDto pagination);
         Task<ApiResultList<TEntity>> GetListAsync();
-        TEntity Find(TPrimaryKey id);
-        Task<TEntity> FindAsync(TPrimaryKey id);
+        TEntity Find(TType id);
+        Task<TEntity> FindAsync(TType id);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
-        Task DeleteAsync(TEntity entity, bool isSave = true);
+        Task DeleteAsync(TType id, bool isSave = true);
         Task DeleteRangeAsync(List<TEntity> list, bool isSave = true);
-        Task<TPrimaryKey> UpdateAsync(TEntity entity, bool isSave = true);
-        TPrimaryKey Update(TEntity entity, bool isSave = true);
-        Task<TPrimaryKey> UpdateRangeAsync(List<TEntity> items, bool isSave = true);
-        IQueryable<TEntity> GetAll();
-        IQueryable<TEntity> GetAllNoTracking();
+        Task<TType> UpdateAsync(TEntity entity, bool isSave = true);
+        Task<TType> UpdateRangeAsync(List<TEntity> items, bool isSave = true);
+        IQueryable<TEntity> Table();
+        IQueryable<TEntity> TableNoTracking();
         IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors);
         Task<List<TEntity>> GetAllListAsync();
         Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate);
