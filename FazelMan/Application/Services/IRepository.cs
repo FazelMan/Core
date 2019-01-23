@@ -9,7 +9,7 @@ using FazelMan.Dto.Api;
 
 namespace FazelMan.Application.Services
 {
-    public interface IRepository<TEntity, TType> where TEntity : BaseEntity<TType>
+    public interface IRepository<TEntity, TType> where TEntity : Entity<TType>
     {
         Task<TEntity> InsertAsync(TEntity entity, bool isSave = true);
         Task InsertRangeAsync(List<TEntity> entity, bool isSave = true);

@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FazelMan.EntityFrameworkCore.Repositories
 {
-    public class EFCoreRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : BaseEntity<TType>, new()
+    public class EFCoreRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : Entity<TType>, new()
     {
         private readonly DbSet<TEntity> _entities;
         private readonly IUnitOfWork _uow;

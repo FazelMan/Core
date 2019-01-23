@@ -31,7 +31,11 @@ namespace FazelMan
             this.PageIndex = pageIndex;
             if (getOnlyTotalCount)
                 return;
-            this.AddRange(source.Skip(pageIndex * pageSize).Take(pageSize).ToList());
+
+            var result = source.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            FilteredCount = result.Count();
+
+            this.AddRange(result.ToList());
         }
 
         /// <summary>
@@ -50,7 +54,11 @@ namespace FazelMan
 
             this.PageSize = pageSize;
             this.PageIndex = pageIndex;
-            this.AddRange(source.Skip(pageIndex * pageSize).Take(pageSize).ToList());
+
+            var result = source.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            FilteredCount = result.Count();
+
+            this.AddRange(result.ToList());
         }
 
         /// <summary>
@@ -87,6 +95,8 @@ namespace FazelMan
         /// Total count
         /// </summary>
         public int TotalCount { get; }
+
+        public int FilteredCount { get; }
 
         /// <summary>
         /// Total pages
