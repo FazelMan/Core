@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FazelMan.EntityFrameworkCor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{66BBCF2A-8752-49C4-89F5-742D638A44B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FazelMan.MongoDb", "FazelMan.MongoDB\FazelMan.MongoDb.csproj", "{4FF64AB5-0A03-4EB6-897A-8BC169172180}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FazelMan.MongoDb", "FazelMan.MongoDb\FazelMan.MongoDb.csproj", "{4FF64AB5-0A03-4EB6-897A-8BC169172180}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

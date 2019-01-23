@@ -16,7 +16,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FazelMan.EntityFrameworkCore.Repositories
 {
-    public class EfCoreRepositoryBase<TDbContext, TEntity, TPrimaryKey> : FazelManRepositoryBase<TEntity, TPrimaryKey>
+    public class EfCoreRepositoryBase<TDbContext, TEntity, TPrimaryKey> : FazelManRepositoryBase<TEntity, TPrimaryKey>,
+        IRepositoryWithDbContext
 
         where TEntity : class, IEntity<TPrimaryKey>
         where TDbContext : DbContext
@@ -209,5 +210,9 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             return await GetAll().Where(predicate).ToListAsync();
         }
 
+        public DbContext GetDbContext()
+        {
+            return Context;
+        }
     }
 }
