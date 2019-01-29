@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FazelMan.Application.Services.ApiResult;
 using FazelMan.Domain.Entities;
-using FazelMan.Dto.Api;
 
 namespace FazelMan.Application.Services
 {
