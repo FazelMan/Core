@@ -74,5 +74,19 @@ namespace FazelMan
         /// <param name="request">HTTP request</param>
         /// <returns>Raw URL</returns>
         string GetRawUrl(HttpRequest request);
+
+        /// <summary>
+        /// Gets store location
+        /// </summary>
+        /// <param name="useSsl">Whether to get SSL secured URL; pass null to determine automatically</param>
+        /// <returns>Store location</returns>
+        string GetStoreLocation(bool? useSsl = null);
+      
+        /// <summary>
+        /// Gets store host location
+        /// </summary>
+        /// <param name="useSsl">Whether to get SSL secured URL</param>
+        /// <returns>Store host location</returns>
+        string GetStoreHost(bool useSsl);
     }
 }

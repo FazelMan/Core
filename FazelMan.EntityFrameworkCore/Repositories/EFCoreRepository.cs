@@ -16,59 +16,58 @@ namespace FazelMan.EntityFrameworkCore.Repositories
 {
     public class EFCoreRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : Entity<TType>, new()
     {
-        private readonly DbSet<TEntity> _entities;
-        private readonly IUnitOfWork _uow;
+        private readonly IDbContext _context;
+        private DbSet<TEntity> _entities;
 
-        public EFCoreRepository(IUnitOfWork uow)
+        public EFCoreRepository(IDbContext context)
         {
-            _uow = uow;
-            _entities = _uow.Set<TEntity>();
+            _context = context;
         }
 
         public async Task<TEntity> InsertAsync(TEntity entity, bool isSave = true)
         {
             await _entities.AddAsync(entity);
-            if (isSave) await _uow.SaveChangesAsync();
+            if (isSave) await _context.SaveChangesAsync();
             return entity;
         }
 
         public async Task InsertRangeAsync(List<TEntity> entity, bool isSave = true)
         {
             await _entities.AddRangeAsync(entity);
-            if (isSave) await _uow.SaveChangesAsync();
+            if (isSave) await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(TType id, bool isSave = true)
+        public async Task DeleteAsync(TEntity entity, bool isSave = true)
         {
-            var table = await _entities.FindAsync(id);
+            var table = await _entities.FindAsync(entity.Id);
             PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
             if (property != null)
             {
                 SetValueWithReflectionExtention.SetValue(table, "IsRemoved", true);
-                if (isSave) _uow.SaveChanges();
+                if (isSave) _context.SaveChanges();
             }
             else
             {
                 _entities.Remove(table);
-                if (isSave) _uow.SaveChanges();
+                if (isSave) _context.SaveChanges();
             }
         }
 
-        public async Task DeleteRangeAsync(List<TEntity> list, bool isSave = true)
+        public async Task DeleteAsync(IEnumerable<TEntity> entities, bool isSave = true)
         {
-            foreach (var item in list)
+            foreach (var item in entities)
             {
                 var table = await _entities.FindAsync(item.Id);
                 PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
                 if (property != null)
                 {
                     SetValueWithReflectionExtention.SetValue(table, "IsRemoved", true);
-                    if (isSave) _uow.SaveChanges();
+                    if (isSave) _context.SaveChanges();
                 }
                 else
                 {
                     _entities.Remove(table);
-                    if (isSave) _uow.SaveChanges();
+                    if (isSave) _context.SaveChanges();
                 }
             }
         }
@@ -111,16 +110,19 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             {
                 return default(TType); //equal null
             }
-            _uow.Entry(model).CurrentValues.SetValues(entity);
-            if (isSave) await _uow.SaveChangesAsync();
+            _context.Entry(model).CurrentValues.SetValues(entity);
+            if (isSave) await _context.SaveChangesAsync();
 
             return entity.Id;
         }
 
-        public async Task<TType> UpdateRangeAsync(List<TEntity> items, bool isSave = true)
+        public async Task<TType> UpdateAsync(IEnumerable<TEntity> entities, bool isSave = true)
         {
-            _entities.UpdateRange(items);
-            if (isSave) await _uow.SaveChangesAsync();
+            if (entities == null)
+                throw new ArgumentNullException(nameof(entities));
+
+            _entities.UpdateRange(entities);
+            if (isSave) await _context.SaveChangesAsync();
             return default(TType);
         }
 

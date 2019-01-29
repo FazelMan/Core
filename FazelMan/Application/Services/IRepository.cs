@@ -18,10 +18,10 @@ namespace FazelMan.Application.Services
         TEntity Find(TType id);
         Task<TEntity> FindAsync(TType id);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
-        Task DeleteAsync(TType id, bool isSave = true);
-        Task DeleteRangeAsync(List<TEntity> list, bool isSave = true);
+        Task DeleteAsync(TEntity entity, bool isSave = true);
+        Task DeleteAsync(IEnumerable<TEntity> entities, bool isSave = true);
         Task<TType> UpdateAsync(TEntity entity, bool isSave = true);
-        Task<TType> UpdateRangeAsync(List<TEntity> items, bool isSave = true);
+        Task<TType> UpdateAsync(IEnumerable<TEntity> entities, bool isSave = true);
         IQueryable<TEntity> Table();
         IQueryable<TEntity> TableNoTracking();
         IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors);

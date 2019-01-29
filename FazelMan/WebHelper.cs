@@ -316,6 +316,53 @@ namespace FazelMan
             return rawUrl;
         }
 
+        /// <summary>
+        /// Gets store location
+        /// </summary>
+        /// <param name="useSsl">Whether to get SSL secured URL; pass null to determine automatically</param>
+        /// <returns>Store location</returns>
+        public virtual string GetStoreLocation(bool? useSsl = null)
+        {
+            var storeLocation = string.Empty;
+
+            //get store host
+            var storeHost = GetStoreHost(useSsl ?? IsCurrentConnectionSecured());
+            if (!string.IsNullOrEmpty(storeHost))
+            {
+                //add application path base if exists
+                storeLocation = IsRequestAvailable() ? $"{storeHost.TrimEnd('/')}{_httpContextAccessor.HttpContext.Request.PathBase}" : storeHost;
+            }
+
+            //ensure that URL is ended with slash
+            storeLocation = $"{storeLocation.TrimEnd('/')}/";
+
+            return storeLocation;
+        }
+
+
+        /// <summary>
+        /// Gets store host location
+        /// </summary>
+        /// <param name="useSsl">Whether to get SSL secured URL</param>
+        /// <returns>Store host location</returns>
+        public virtual string GetStoreHost(bool useSsl)
+        {
+            if (!IsRequestAvailable())
+                return string.Empty;
+
+            //try to get host from the request HOST header
+            var hostHeader = _httpContextAccessor.HttpContext.Request.Headers[HeaderNames.Host];
+            if (StringValues.IsNullOrEmpty(hostHeader))
+                return string.Empty;
+
+            //add scheme to the URL
+            var storeHost = $"{(useSsl ? Uri.UriSchemeHttps : Uri.UriSchemeHttp)}{Uri.SchemeDelimiter}{hostHeader.FirstOrDefault()}";
+
+            //ensure that host is ended with slash
+            storeHost = $"{storeHost.TrimEnd('/')}/";
+
+            return storeHost;
+        }
         #endregion
     }
 }
