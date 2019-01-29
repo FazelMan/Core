@@ -11,21 +11,31 @@ namespace FazelMan.Application.Services
 {
     public interface IRepository<TEntity, TType> where TEntity : Entity<TType>
     {
-        Task<TEntity> InsertAsync(TEntity entity, bool isSave = true);
-        Task InsertRangeAsync(List<TEntity> entity, bool isSave = true);
-        Task<ApiResultList<TEntity>> GetListAsync(PaginationDto pagination);
-        Task<ApiResultList<TEntity>> GetListAsync();
         TEntity Find(TType id);
         Task<TEntity> FindAsync(TType id);
+
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
+
+        TEntity Insert(TEntity entity, bool isSave = true);
+        void Insert(IEnumerable<TEntity> entity, bool isSave = true);
+        Task<TEntity> InsertAsync(TEntity entity, bool isSave = true);
+        Task InsertAsync(IEnumerable<TEntity> entity, bool isSave = true);
+
+        void Delete(TEntity entity, bool isSave = true);
+        void Delete(TType id, bool isSave = true);
+        void Delete(IEnumerable<TEntity> entities, bool isSave = true);
         Task DeleteAsync(TEntity entity, bool isSave = true);
+        Task DeleteAsync(TType id, bool isSave = true);
         Task DeleteAsync(IEnumerable<TEntity> entities, bool isSave = true);
+
+        TType Update(TEntity entity, bool isSave = true);
+        void Update(IEnumerable<TEntity> entities, bool isSave = true);
         Task<TType> UpdateAsync(TEntity entity, bool isSave = true);
-        Task<TType> UpdateAsync(IEnumerable<TEntity> entities, bool isSave = true);
+        Task UpdateAsync(IEnumerable<TEntity> entities, bool isSave = true);
+
         IQueryable<TEntity> Table();
         IQueryable<TEntity> TableNoTracking();
-        IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors);
-        Task<List<TEntity>> GetAllListAsync();
-        Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate);
+
+        IPagedList<TEntity> GetAll(int pageIndex = 0, int pageSize = int.MaxValue);
     }
 }

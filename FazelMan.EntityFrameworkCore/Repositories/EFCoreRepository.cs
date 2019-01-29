@@ -5,10 +5,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using FazelMan.Application.Services;
-using FazelMan.Application.Services.ApiResult;
 using FazelMan.Domain.Entities;
 using FazelMan.Domain.Uow;
-using FazelMan.Dto.Api;
 using FazelMan.Extentions;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +22,34 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             _context = context;
         }
 
+        public TEntity Find(TType id)
+        {
+            return _entities.Find(id);
+        }
+
+        public async Task<TEntity> FindAsync(TType id)
+        {
+            return await _entities.FindAsync(id);
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await _entities.AnyAsync(expression);
+        }
+
+        public TEntity Insert(TEntity entity, bool isSave = true)
+        {
+            _entities.Add(entity);
+            if (isSave) _context.SaveChanges();
+            return entity;
+        }
+
+        public void Insert(IEnumerable<TEntity> entity, bool isSave = true)
+        {
+            _entities.AddRange(entity);
+            if (isSave) _context.SaveChanges();
+        }
+
         public async Task<TEntity> InsertAsync(TEntity entity, bool isSave = true)
         {
             await _entities.AddAsync(entity);
@@ -31,15 +57,82 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             return entity;
         }
 
-        public async Task InsertRangeAsync(List<TEntity> entity, bool isSave = true)
+        public async Task InsertAsync(IEnumerable<TEntity> entity, bool isSave = true)
         {
             await _entities.AddRangeAsync(entity);
             if (isSave) await _context.SaveChangesAsync();
         }
 
+        public void Delete(TEntity entity, bool isSave = true)
+        {
+            var table = _entities.Find(entity.Id);
+            PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
+            if (property != null)
+            {
+                SetValueWithReflectionExtention.SetValue(table, "IsRemoved", true);
+                if (isSave) _context.SaveChanges();
+            }
+            else
+            {
+                _entities.Remove(table);
+                if (isSave) _context.SaveChanges();
+            }
+        }
+
+        public void Delete(TType id, bool isSave = true)
+        {
+            var table = _entities.Find(id);
+            PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
+            if (property != null)
+            {
+                SetValueWithReflectionExtention.SetValue(table, "IsRemoved", true);
+                if (isSave) _context.SaveChanges();
+            }
+            else
+            {
+                _entities.Remove(table);
+                if (isSave) _context.SaveChanges();
+            }
+        }
+
+        public void Delete(IEnumerable<TEntity> entities, bool isSave = true)
+        {
+            foreach (var item in entities)
+            {
+                var table = _entities.Find(item.Id);
+                PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
+                if (property != null)
+                {
+                    SetValueWithReflectionExtention.SetValue(table, "IsRemoved", true);
+                    if (isSave) _context.SaveChanges();
+                }
+                else
+                {
+                    _entities.Remove(table);
+                    if (isSave) _context.SaveChanges();
+                }
+            }
+        }
+
         public async Task DeleteAsync(TEntity entity, bool isSave = true)
         {
             var table = await _entities.FindAsync(entity.Id);
+            PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
+            if (property != null)
+            {
+                SetValueWithReflectionExtention.SetValue(table, "IsRemoved", true);
+                if (isSave) _context.SaveChanges();
+            }
+            else
+            {
+                _entities.Remove(table);
+                if (isSave) _context.SaveChanges();
+            }
+        }
+
+        public async Task DeleteAsync(TType id, bool isSave = true)
+        {
+            var table = await _entities.FindAsync(id);
             PropertyInfo property = table.GetType().GetProperties().FirstOrDefault(x => x.Name == "IsRemoved");
             if (property != null)
             {
@@ -72,35 +165,26 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             }
         }
 
-        public async Task<ApiResultList<TEntity>> GetListAsync(PaginationDto pagination)
+        public TType Update(TEntity entity, bool isSave = true)
         {
-            var query = _entities.AsNoTracking();
-
-            var result = await query
-            .Skip((pagination.PageIndex - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
-            .ToListAsync();
-
-            return new ApiResultList<TEntity>
+            var model = Find(entity.Id);
+            if (model == null)
             {
-                Result = result,
-                FilteredCount = result.Count,
-                TotalCount = query.Count()
-            };
+                return default(TType);
+            }
+            _context.Entry(model).CurrentValues.SetValues(entity);
+            if (isSave) _context.SaveChanges();
+
+            return entity.Id;
         }
 
-        public async Task<ApiResultList<TEntity>> GetListAsync()
+        public void Update(IEnumerable<TEntity> entities, bool isSave = true)
         {
-            var query = _entities.AsNoTracking();
+            if (entities == null)
+                throw new ArgumentNullException(nameof(entities));
 
-            var result = await query.ToListAsync();
-
-            return new ApiResultList<TEntity>
-            {
-                Result = result,
-                FilteredCount = result.Count,
-                TotalCount = query.Count()
-            };
+            _entities.UpdateRange(entities);
+            if (isSave) _context.SaveChanges();
         }
 
         public async Task<TType> UpdateAsync(TEntity entity, bool isSave = true)
@@ -108,7 +192,7 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             var model = await FindAsync(entity.Id);
             if (model == null)
             {
-                return default(TType); //equal null
+                return default(TType);
             }
             _context.Entry(model).CurrentValues.SetValues(entity);
             if (isSave) await _context.SaveChangesAsync();
@@ -116,30 +200,15 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             return entity.Id;
         }
 
-        public async Task<TType> UpdateAsync(IEnumerable<TEntity> entities, bool isSave = true)
+        public async Task UpdateAsync(IEnumerable<TEntity> entities, bool isSave = true)
         {
             if (entities == null)
                 throw new ArgumentNullException(nameof(entities));
 
             _entities.UpdateRange(entities);
             if (isSave) await _context.SaveChangesAsync();
-            return default(TType);
         }
 
-        public async Task<TEntity> FindAsync(TType id)
-        {
-            return await _entities.FindAsync(id);
-        }
-
-        public TEntity Find(TType id)
-        {
-            return _entities.Find(id);
-        }
-
-        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)
-        {
-            return await _entities.AnyAsync(expression);
-        }
 
         public IQueryable<TEntity> Table()
         {
@@ -151,32 +220,10 @@ namespace FazelMan.EntityFrameworkCore.Repositories
             return _entities.AsNoTracking();
         }
 
-        public IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors)
+        public IPagedList<TEntity> GetAll(int pageIndex = 0, int pageSize = int.MaxValue)
         {
-            if (propertySelectors == null || propertySelectors.Length <= 0)
-            {
-                return Table();
-            }
-
-            var query = Table();
-
-            foreach (var propertySelector in propertySelectors)
-            {
-                query = query.Include(propertySelector);
-            }
-
-            return query;
+            var query = _entities.AsNoTracking();
+            return new PagedList<TEntity>(query, pageIndex, pageSize);
         }
-
-        public async Task<List<TEntity>> GetAllListAsync()
-        {
-            return await Table().ToListAsync();
-        }
-
-        public async Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await Table().Where(predicate).ToListAsync();
-        }
-
     }
 }
