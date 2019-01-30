@@ -11,7 +11,7 @@ namespace FazelMan.Domain.Uow
 {
     public interface IDbContext : IDisposable
     {
-        DbSet<TEntity> Set<TEntity>() where TEntity : Entity;
+        DbSet<TEntity> Set<TEntity>() where TEntity : class;
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
@@ -52,6 +52,6 @@ namespace FazelMan.Domain.Uow
         /// <returns>The number of rows affected</returns>
         int ExecuteSqlCommand(RawSqlString sql, bool doNotEnsureTransaction = false, int? timeout = null, params object[] parameters);
 
-        void Detach<TEntity>(TEntity entity) where TEntity : Entity;
+        void Detach<TEntity>(TEntity entity) where TEntity : class;
     }
 }

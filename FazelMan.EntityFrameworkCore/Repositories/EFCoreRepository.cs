@@ -15,11 +15,12 @@ namespace FazelMan.EntityFrameworkCore.Repositories
     public class EFCoreRepository<TEntity, TType> : IRepository<TEntity, TType> where TEntity : Entity<TType>, new()
     {
         private readonly IDbContext _context;
-        private DbSet<TEntity> _entities;
+        private readonly DbSet<TEntity> _entities;
 
         public EFCoreRepository(IDbContext context)
         {
             _context = context;
+            _entities = context.Set<TEntity>();
         }
 
         public TEntity Find(TType id)
