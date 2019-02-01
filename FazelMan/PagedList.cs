@@ -9,7 +9,7 @@ namespace FazelMan
     /// </summary>
     /// <typeparam name="T">T</typeparam>
     [Serializable]
-    public class PagedList<T> : List<T>, IPagedList<T> 
+    public class PagedList<T> : List<T>, IPagedList<T>
     {
         /// <summary>
         /// Ctor
@@ -79,6 +79,10 @@ namespace FazelMan
             this.PageSize = pageSize;
             this.PageIndex = pageIndex;
             this.AddRange(source);
+        }
+
+        public PagedList()
+        {
         }
 
         /// <summary>

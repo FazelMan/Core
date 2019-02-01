@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using FazelMan.Application.Services.ApiResult;
 using FazelMan.Domain.Entities;
 
 namespace FazelMan.Application.Services

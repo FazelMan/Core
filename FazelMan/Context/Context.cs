@@ -14,24 +14,27 @@ namespace FazelMan.Context
 
         public Uri Uri()
         {
-            var request = GetHttpRequest();
-            UriBuilder uriBuilder = new UriBuilder();
-            uriBuilder.Scheme = request.Scheme;
-            uriBuilder.Host = request.Host.Host;
-            uriBuilder.Path = request.Path.ToString();
-            uriBuilder.Query = request.QueryString.ToString();
+            var httpContext = GetHttpContext();
+            var uriBuilder = new UriBuilder
+            {
+                Scheme = httpContext.Request.Scheme,
+                Host = httpContext.Request.Host.Host,
+                Path = httpContext.Request.Path.ToString(),
+                Query = httpContext.Request.QueryString.ToString()
+            };
             return uriBuilder.Uri;
         }
 
         public string GetHostDomain()
         {
-            return $"{GetHttpRequest().Scheme}://{GetHttpRequest().Host}";
+            return $"{GetHttpContext().Request.Scheme}://{GetHttpContext().Request.Host}";
         }
 
-        public HttpRequest GetHttpRequest()
+        public HttpContext GetHttpContext()
         {
-            return _httpContextAccessor.HttpContext.Request;
+            return _httpContextAccessor.HttpContext;
         }
+        
 
         public Guid GetUserId()
         {

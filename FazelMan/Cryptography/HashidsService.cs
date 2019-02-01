@@ -12,7 +12,6 @@ namespace FazelMan.Cryptography
         public HashidsService(IConfiguration configuration)
         {
             _configuration = configuration;
-
         }
 
         public string Encrypt(string template, int value)

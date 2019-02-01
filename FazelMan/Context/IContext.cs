@@ -7,7 +7,7 @@ namespace FazelMan.Context
     {
         Uri Uri();
         string GetHostDomain();
-        HttpRequest GetHttpRequest();
+        HttpContext GetHttpContext();
         Guid GetUserId();
     }
 }
