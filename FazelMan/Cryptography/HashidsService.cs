@@ -41,7 +41,7 @@ namespace FazelMan.Cryptography
 
         private int DecryptHashids(string stringToDecrypt)
         {
-            return _hashids.Decode(stringToDecrypt).First();
+            return _hashids.Decode(stringToDecrypt).FirstOrDefault();
         }
     }
 }
