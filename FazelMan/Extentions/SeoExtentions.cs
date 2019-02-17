@@ -13,16 +13,19 @@ namespace FazelMan.Extentions
         /// </summary>
         public static string ToSlug(this string inputString)
         {
-            inputString = inputString.ToLower();
-            inputString = inputString.Trim();
-            inputString = CleanWhiteSpace(inputString, true);
-            inputString = ApplyReplacements(inputString, new Dictionary<string, string>
+            if (!string.IsNullOrWhiteSpace(inputString))
+            {
+                inputString = inputString.ToLower();
+                inputString = inputString.Trim();
+                inputString = CleanWhiteSpace(inputString, true);
+                inputString = ApplyReplacements(inputString, new Dictionary<string, string>
             {
                 { " ", "_" }
             });
-            inputString = RemoveDiacritics(inputString);
-            inputString = DeleteCharacters(inputString, @"[^a-zA-Z0-9آ-ی\-\._]");
-            inputString = Regex.Replace(inputString, "--+", "-");
+                inputString = RemoveDiacritics(inputString);
+                inputString = DeleteCharacters(inputString, @"[^a-zA-Z0-9آ-ی\-\._]");
+                inputString = Regex.Replace(inputString, "--+", "-");
+            }
 
             return inputString;
         }
