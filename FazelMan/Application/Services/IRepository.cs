@@ -34,6 +34,6 @@ namespace FazelMan.Application.Services
         IQueryable<TEntity> Table();
         IQueryable<TEntity> TableNoTracking();
 
-        IPagedList<TEntity> GetAll(int pageIndex = 0, int pageSize = int.MaxValue);
+        IPagedList<TEntity> GetAll(int pageIndex = 1, int pageSize = int.MaxValue);
     }
 }

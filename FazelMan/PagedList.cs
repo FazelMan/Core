@@ -18,7 +18,7 @@ namespace FazelMan
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <param name="getOnlyTotalCount">A value in indicating whether you want to load only total number of records. Set to "true" if you don't want to load data from database</param>
-        public PagedList(IQueryable<T> source, int pageIndex, int pageSize, bool getOnlyTotalCount = false)
+        public PagedList(IQueryable<T> source, int pageIndex, int pageSize = 10, bool getOnlyTotalCount = false)
         {
             var total = source.Count();
             this.TotalCount = total;
@@ -44,7 +44,7 @@ namespace FazelMan
         /// <param name="source">source</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        public PagedList(IList<T> source, int pageIndex, int pageSize)
+        public PagedList(IList<T> source, int pageIndex, int pageSize = 10)
         {
             TotalCount = source.Count;
             TotalPages = TotalCount / pageSize;
@@ -59,26 +59,6 @@ namespace FazelMan
             FilteredCount = result.Count();
 
             this.AddRange(result.ToList());
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="source">source</param>
-        /// <param name="pageIndex">Page index</param>
-        /// <param name="pageSize">Page size</param>
-        /// <param name="totalCount">Total count</param>
-        public PagedList(IEnumerable<T> source, int pageIndex, int pageSize, int totalCount)
-        {
-            TotalCount = totalCount;
-            TotalPages = TotalCount / pageSize;
-
-            if (TotalCount % pageSize > 0)
-                TotalPages++;
-
-            this.PageSize = pageSize;
-            this.PageIndex = pageIndex;
-            this.AddRange(source);
         }
 
         public PagedList()
