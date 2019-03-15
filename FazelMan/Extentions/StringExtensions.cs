@@ -523,5 +523,11 @@ namespace FazelMan.Common.Extentions
         {
             return val != null && val.Length <= maxCharLength;
         }
+
+        public static string JoinAndNullIgnore(this string val, params string[] values)
+        {
+            var appendedValue = values.Append(val);
+            return string.Join('-', appendedValue.Where(x => !x.IsNullOrEmpty()));
+        }
     }
 }
