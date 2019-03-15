@@ -20,7 +20,7 @@ namespace FazelMan.Extentions
                 inputString = CleanWhiteSpace(inputString, true);
                 inputString = ApplyReplacements(inputString, new Dictionary<string, string>
             {
-                { " ", "_" }
+                { " ", "-" }
             });
                 inputString = RemoveDiacritics(inputString);
                 inputString = DeleteCharacters(inputString, @"[^a-zA-Z0-9آ-ی\-\._]");
